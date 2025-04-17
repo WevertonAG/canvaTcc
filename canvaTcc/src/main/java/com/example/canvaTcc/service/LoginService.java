@@ -11,7 +11,7 @@ import java.util.Optional;
 public class LoginService {
     @Autowired
     private LoginRepository loginRepository;
-    public User authenticate(Integer id, String login, String password) {
+    public User authenticate(Integer id, String login, String password, String name ) {
         Optional<User> user = loginRepository.findByLogin(login);
         if(user.isEmpty()) {
             throw new RuntimeException("Usuário não encontrado!");

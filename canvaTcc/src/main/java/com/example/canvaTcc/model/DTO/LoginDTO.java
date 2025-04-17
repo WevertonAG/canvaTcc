@@ -6,6 +6,7 @@ public class LoginDTO {
     private Integer id;
     private String login;
     private String password;
+    private String name;
 
 
     public LoginDTO() {
@@ -15,6 +16,7 @@ public class LoginDTO {
             this.id = user.getId();
             this.login = user.getLogin();
             this.password = user.getPassword();
+            this.name = user.getName();
         }
     }
 
@@ -22,23 +24,17 @@ public class LoginDTO {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+
+    public String getName() {
+        return name;
     }
+
 }

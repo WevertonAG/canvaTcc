@@ -1,6 +1,7 @@
 package com.example.canvaTcc.controller;
 
 import com.example.canvaTcc.model.DTO.LoginDTO;
+import com.example.canvaTcc.model.DTO.LoginResponseDTO;
 import com.example.canvaTcc.model.entity.User;
 import com.example.canvaTcc.service.LoginService;
 import com.example.canvaTcc.service.UserService;
@@ -23,8 +24,14 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO){
         try{
-            User user = loginService.authenticate(loginDTO.getId(), loginDTO.getLogin(), loginDTO.getPassword());
-            return ResponseEntity.ok(new LoginDTO(user));
+            User user = loginService.authenticate(
+                    loginDTO.getId(),
+                    loginDTO.getLogin(),
+                    loginDTO.getPassword(),
+                    loginDTO.getName()
+            );
+            LoginResponseDTO response = new LoginResponseDTO(user.getId(),user.getName());
+            return ResponseEntity.ok(response);
         }catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }

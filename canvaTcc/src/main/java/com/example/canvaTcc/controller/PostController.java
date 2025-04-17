@@ -43,4 +43,9 @@ public class PostController {
     public Post getById(@PathVariable Integer id) {
         return postService.findById(id);
     }
+
+    @DeleteMapping
+    public void delete(@PathVariable Integer id) {
+        postService.delete(id);
+    }
 }
