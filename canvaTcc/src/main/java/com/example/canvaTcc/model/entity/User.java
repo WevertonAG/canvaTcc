@@ -2,7 +2,9 @@ package com.example.canvaTcc.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name= "users")
@@ -18,6 +20,17 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
+    @ManyToMany(mappedBy = "colaboradores")
+    private Set<Quadro> quadrosColaborando = new HashSet<>();
+
+
+    public Set<Quadro> getQuadrosColaborando() {
+        return quadrosColaborando;
+    }
+
+    public void setQuadrosColaborando(Set<Quadro> quadrosColaborando) {
+        this.quadrosColaborando = quadrosColaborando;
+    }
 
     public int getId() {
         return id;

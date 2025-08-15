@@ -1,5 +1,6 @@
 package com.example.canvaTcc.service;
 
+import com.example.canvaTcc.model.DTO.PostDTO;
 import com.example.canvaTcc.model.entity.Post;
 
 import com.example.canvaTcc.repository.PostRepository;
@@ -23,8 +24,16 @@ public class PostService {
         return repository.save(post);
     }
 
-    public Post findById(Integer id) {
-        return repository.findById(id).orElse(null);
+    public PostDTO findById(Integer id) {
+        Post post = repository.findById(id).orElse(null);
+        if (post == null) return null;
+
+        return new PostDTO(
+                post.getId(),
+                post.getDescription(),
+                post.getCategory(),
+                post.getUser().getId()
+        );
     }
 
     public void delete(Integer id) {

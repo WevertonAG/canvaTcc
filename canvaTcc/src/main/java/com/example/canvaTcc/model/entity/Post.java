@@ -2,6 +2,9 @@ package com.example.canvaTcc.model.entity;
 
 import com.example.canvaTcc.model.convert.ConverterCategory;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import java.io.Serializable;
@@ -21,6 +24,9 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuadroPost> quadroPosts = new ArrayList<>();
 
     public String getDescription() {
         return description;

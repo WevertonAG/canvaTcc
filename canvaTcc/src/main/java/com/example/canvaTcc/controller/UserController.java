@@ -57,4 +57,10 @@ public class UserController {
 
         return ResponseEntity.ok(userDTO);
     }
+
+    @GetMapping("/search/{query}")
+    public ResponseEntity<List<UserDTO>> searchUsers(@PathVariable String query) {
+        List<UserDTO> result = service.searchUsers(query);
+        return ResponseEntity.ok(result);
+    }
 }

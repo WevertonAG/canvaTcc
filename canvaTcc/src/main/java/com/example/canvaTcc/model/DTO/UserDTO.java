@@ -1,4 +1,6 @@
 package com.example.canvaTcc.model.DTO;
+import com.example.canvaTcc.model.entity.User;
+
 import java.util.List;
 
 public class UserDTO {
@@ -15,6 +17,12 @@ public class UserDTO {
         this.name = name;
         this.login = login;
         this.posts = posts;
+    }
+
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.login = user.getLogin();
     }
 
     public Integer getId() {

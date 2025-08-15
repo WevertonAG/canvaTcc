@@ -7,6 +7,7 @@ import com.example.canvaTcc.service.PostService;
 import com.example.canvaTcc.service.UserService;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,8 +41,12 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public Post getById(@PathVariable Integer id) {
-        return postService.findById(id);
+    public ResponseEntity<PostDTO> getById(@PathVariable Integer id) {
+        PostDTO dto = postService.findById(id);
+        if(dto == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dto);
     }
 
     @DeleteMapping
