@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 public class QuadroService {
@@ -136,9 +137,16 @@ public class QuadroService {
     }
 
     public void deletarQuadro(Integer quadroId, Integer userId) {
-        Quadro quadro = quadroRepository.findByIdAndOwnerId(quadroId, userId)
-                .orElseThrow(()-> new RuntimeException("Quadro no encontrado ou usuário não é o Dono "));
-        quadroRepository.delete(quadro);
+        Quadro q = quadroRepository.findById(quadroId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Quadro não encontrado"));
+
+        if (!Objects.equals(q.getOwner().getId(), userId)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN, "Apenas o owner pode excluir");
+        }
+
+        quadroRepository.delete(q);
     }
 
 

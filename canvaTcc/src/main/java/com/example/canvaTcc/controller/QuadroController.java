@@ -59,12 +59,11 @@ public class QuadroController {
         return ResponseEntity.ok(quadroService.listarQuadrosDoUsuario(userId));
     }
 
-    @DeleteMapping("/{quadroId}")
+    @DeleteMapping("/{id}/user/{userId}")
     public ResponseEntity<Void> removerQuadro(
-            @PathVariable Integer quadroId,
-            @RequestParam Integer userId) {
-        quadroService.deletarQuadro(quadroId,userId);
+            @PathVariable("id") Integer quadroId,
+            @PathVariable("userId") Integer userId) {
+        quadroService.deletarQuadro(quadroId, userId);
         return ResponseEntity.noContent().build();
-
     }
 }
