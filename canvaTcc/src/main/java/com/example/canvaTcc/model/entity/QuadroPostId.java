@@ -15,6 +15,11 @@ public class QuadroPostId implements Serializable {
     // getters e setters
     public QuadroPostId() {}
 
+    public QuadroPostId(Integer quadroId, Integer postId) {
+        this.quadroId = quadroId;
+        this.postId =  postId;
+    }
+
     public Integer getPostId() {
         return postId;
     }

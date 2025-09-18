@@ -23,15 +23,9 @@ public class UserController {
                 .map(user -> new UserDTO(
                         user.getId(),
                         user.getName(),
-                        user.getLogin(),
-                        user.getPosts().stream()
-                                .map(post -> new PostResumeDTO(
-                                        post.getId(),
-                                        post.getDescription(),
-                                        post.getCategory()
-                                ))
-                                .toList()
-                )).toList();
+                        user.getLogin()
+                ))
+                .toList();
     }
 
     @PostMapping
@@ -45,14 +39,7 @@ public class UserController {
         UserDTO userDTO = new UserDTO(
                 user.getId(),
                 user.getName(),
-                user.getLogin(),
-                user.getPosts().stream()
-                        .map(post -> new PostResumeDTO(
-                                post.getId(),
-                                post.getDescription(),
-                                post.getCategory()
-                        ))
-                        .toList()
+                user.getLogin()
         );
 
         return ResponseEntity.ok(userDTO);

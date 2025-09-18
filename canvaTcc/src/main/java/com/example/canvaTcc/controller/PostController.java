@@ -1,12 +1,15 @@
 package com.example.canvaTcc.controller;
 
 import com.example.canvaTcc.model.DTO.PostDTO;
+import com.example.canvaTcc.model.DTO.PostRequestDTO;
+import com.example.canvaTcc.model.DTO.PostResponseDTO;
 import com.example.canvaTcc.model.entity.Post;
 import com.example.canvaTcc.model.entity.User;
 import com.example.canvaTcc.service.PostService;
 import com.example.canvaTcc.service.UserService;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,17 +30,19 @@ public class PostController {
                 post.getId(),
                 post.getDescription(),
                 post.getCategory(),
-                post.getUser().getId()
+                post.getQuadro().getId()
         )).toList();
     }
 
     @PostMapping
-    public Post create(@RequestBody Post post) {
-        // Valida usuário antes de salvar o post
-        User user = userService.findById(post.getUser().getId());
-        if (user == null) throw new RuntimeException("Usuário não encontrado");
-        post.setUser(user);
-        return postService.save(post);
+    public ResponseEntity<PostResponseDTO> create(@RequestBody PostRequestDTO dto) {
+        PostResponseDTO created = postService.createPost(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+    @GetMapping("/quadro/{quadroId}")
+    public ResponseEntity<List<PostResponseDTO>> getPostsByQuadro(@PathVariable Integer quadroId) {
+        List<PostResponseDTO> posts = postService.getPostsByQuadroId(quadroId);
+        return ResponseEntity.ok(posts);
     }
 
     @GetMapping("/{id}")

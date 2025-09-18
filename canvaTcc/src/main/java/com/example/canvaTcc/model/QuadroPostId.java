@@ -22,20 +22,20 @@ public class QuadroPostId implements Serializable {
         this.postId = postId;
     }
 
-    public Integer getQuadroId() {
-        return quadroId;
-    }
-
-    public void setQuadroId(Integer quadroId) {
-        this.quadroId = quadroId;
-    }
-
     public Integer getPostId() {
         return postId;
     }
 
     public void setPostId(Integer postId) {
         this.postId = postId;
+    }
+
+    public Integer getQuadroId() {
+        return quadroId;
+    }
+
+    public void setQuadroId(Integer quadroId) {
+        this.quadroId = quadroId;
     }
 
     @Override

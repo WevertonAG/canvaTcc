@@ -12,11 +12,10 @@ public class UserDTO {
 
     public UserDTO() {}
 
-    public UserDTO(Integer id, String name, String login, List<PostResumeDTO> posts) {
+    public UserDTO(Integer id, String name, String login) {
         this.id = id;
         this.name = name;
         this.login = login;
-        this.posts = posts;
     }
 
     public UserDTO(User user) {

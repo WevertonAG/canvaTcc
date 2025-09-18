@@ -22,11 +22,8 @@ public class Post {
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<QuadroPost> quadroPosts = new ArrayList<>();
+    @JoinColumn(name = "quadro_id", nullable = false)
+    private Quadro quadro;
 
     public String getDescription() {
         return description;
@@ -52,11 +49,11 @@ public class Post {
         this.category = category;
     }
 
-    public User getUser() {
-        return user;
+    public Quadro getQuadro() {
+        return quadro;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setQuadro(Quadro quadro) {
+        this.quadro = quadro;
     }
 }

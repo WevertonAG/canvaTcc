@@ -18,8 +18,8 @@ public class User {
     private String login;
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Post> posts;
+    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+   // private List<Post> posts;
     @ManyToMany(mappedBy = "colaboradores")
     private Set<Quadro> quadrosColaborando = new HashSet<>();
 
@@ -64,11 +64,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
+    //public List<Post> getPosts() {
+      //  return posts;
+    //}
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
+    //public void setPosts(List<Post> posts) {
+      //  this.posts = posts;
+    //}
 }
