@@ -98,8 +98,11 @@ public class PostService {
         );
     }
 
+    @Transactional
     public void delete(Integer id) {
-        Post post = postRepository.findById(id).orElse(null);
+        quadroPostRepository.deleteByPostId(id);
+
+        // Agora remove o post
         postRepository.deleteById(id);
     }
 }

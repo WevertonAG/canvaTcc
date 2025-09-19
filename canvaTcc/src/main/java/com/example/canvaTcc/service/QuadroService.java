@@ -10,6 +10,7 @@ import com.example.canvaTcc.repository.PostRepository;
 import com.example.canvaTcc.repository.QuadroPostRepository;
 import com.example.canvaTcc.repository.QuadroRepository;
 import com.example.canvaTcc.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -135,7 +136,7 @@ public class QuadroService {
 
         return resposta;
     }
-
+    @Transactional
     public void deletarQuadro(Integer quadroId, Integer userId) {
         Quadro q = quadroRepository.findById(quadroId)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -145,9 +146,9 @@ public class QuadroService {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN, "Apenas o owner pode excluir");
         }
-
+        quadroPostRepository.deleteByQuadroId(quadroId);
+        postRepository.deleteByQuadroId(quadroId);
         quadroRepository.delete(q);
     }
-
 
 }

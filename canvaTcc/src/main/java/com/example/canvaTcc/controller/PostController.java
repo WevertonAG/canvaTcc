@@ -54,7 +54,7 @@ public class PostController {
         return ResponseEntity.ok(dto);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         postService.delete(id);
     }
