@@ -97,6 +97,16 @@ public class PostService {
                 post.getQuadro().getId()
         );
     }
+    public PostResponseDTO updateDescription(Integer postId, String newDescription) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post não encontrado"));
+
+        post.setDescription(newDescription);
+        Post saved = postRepository.save(post);
+
+        return new PostResponseDTO(saved.getId(),saved.getDescription(),saved.getCategory(),saved.getQuadro().getId());
+    }
+
 
     @Transactional
     public void delete(Integer id) {

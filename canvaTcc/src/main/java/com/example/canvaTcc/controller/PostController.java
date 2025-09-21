@@ -3,8 +3,7 @@ package com.example.canvaTcc.controller;
 import com.example.canvaTcc.model.DTO.PostDTO;
 import com.example.canvaTcc.model.DTO.PostRequestDTO;
 import com.example.canvaTcc.model.DTO.PostResponseDTO;
-import com.example.canvaTcc.model.entity.Post;
-import com.example.canvaTcc.model.entity.User;
+import com.example.canvaTcc.model.DTO.UpdatePostDescriptionDTO;
 import com.example.canvaTcc.service.PostService;
 import com.example.canvaTcc.service.UserService;
 import java.util.List;
@@ -39,6 +38,16 @@ public class PostController {
         PostResponseDTO created = postService.createPost(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
+
+    @PutMapping("/{id}/description")
+    public ResponseEntity<PostResponseDTO> updateDescription(
+            @PathVariable Integer id,
+            @RequestBody UpdatePostDescriptionDTO dto) {
+
+        PostResponseDTO updatedPost = postService.updateDescription(id, dto.getDescription());
+        return ResponseEntity.ok(updatedPost);
+    }
+
     @GetMapping("/quadro/{quadroId}")
     public ResponseEntity<List<PostResponseDTO>> getPostsByQuadro(@PathVariable Integer quadroId) {
         List<PostResponseDTO> posts = postService.getPostsByQuadroId(quadroId);
